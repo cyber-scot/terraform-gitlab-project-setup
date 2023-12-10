@@ -20,7 +20,7 @@ data "azurerm_key_vault_secrets" "get_secrets" {
 }
 
 data "azurerm_key_vault_secret" "secrets" {
-  for_each     = toset(data.azurerm_key_vault_secrets.secrets.names)
+  for_each     = toset(data.azurerm_key_vault_secrets.get_secrets.names)
   name         = each.key
-  key_vault_id = data.azurerm_key_vault_secrets.secrets.key_vault_id
+  key_vault_id = data.azurerm_key_vault_secrets.get_secrets.key_vault_id
 }
