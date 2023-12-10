@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-########################################################
+#########################################################
 # Script Usage:
 # By default, this script runs in 'manual mode' (tf-rel function).
 #
@@ -9,14 +9,14 @@
 #   -a or --append        : Appends the tf-rel function to the user's .bashrc.
 #   -v or --version X.X.X : Sets a specific version tag when running tf-rel.
 #                           Replace 'X.X.X' with the desired version number.
-########################################################
+#########################################################
 
 function stfi () {
-    curl https://raw.githubusercontent.com/cyber-scot/utilities/main/terraform/helpers/tf-sort.sh | bash -s -- variables.tf variables.tf
+  python3 sort_tf_variables.py
 }
 
 function stfo () {
-    curl https://raw.githubusercontent.com/cyber-scot/utilities/main/terraform/helpers/tf-sort.sh | bash -s -- outputs.tf outputs.tf
+  python3 sort_tf_outputs.py
 }
 
 function tf-rel() {
@@ -57,7 +57,7 @@ function tf-rel() {
     fi
     terraform fmt -recursive
     terraform-docs markdown . >> README.md
-    stfi && \
+    stfi
     stfo
     git add --all
     git commit -m "Update module"
